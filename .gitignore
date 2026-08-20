@@ -1,6 +1,5 @@
 credentials.json
 token.json
 .env
-processed_ids.txt
 __pycache__/
 *.pyc
