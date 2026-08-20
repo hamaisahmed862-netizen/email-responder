@@ -2,7 +2,7 @@
 
 An automation that reads unread Gmail messages, decides whether each one needs a reply, and — if so — drafts one using an LLM. Every draft is saved directly into Gmail for the user to review, edit, and send manually. **Nothing is ever sent automatically.**
 
-Runs automatically in the cloud via GitHub Actions every 30 minutes — no local machine needs to be powered on.
+Runs automatically in the cloud via GitHub Actions every 20 minutes — no local machine needs to be powered on.
 
 ## Why draft-only, not auto-send
 
@@ -45,7 +45,7 @@ LLMs can be confidently wrong — invent facts, misjudge tone, or answer questio
 
 ## Automation (cloud, via GitHub Actions)
 
-The workflow at `.github/workflows/email-responder.yml` runs the script every 30 minutes on GitHub's servers.
+The workflow at `.github/workflows/email-responder.yml` runs the script every 20 minutes on GitHub's servers.
 
 To deploy your own copy:
 1. Fork/clone this repo
