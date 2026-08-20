@@ -2,7 +2,7 @@ name: Email Responder
 
 on:
   schedule:
-      - cron: "*/30 * * * *"
+        - cron: "*/20 * * * *"
   workflow_dispatch:  # lets you manually trigger a run from the Actions tab
 
 permissions:
