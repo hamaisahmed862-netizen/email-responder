@@ -60,9 +60,9 @@ The workflow reconstructs the credential files from secrets at runtime, runs the
 ## Known limitations
 
 - Single-user only — tied to one Gmail account's credentials
-- GitHub Actions free tier has a monthly minutes cap; 30-minute intervals comfortably fit within it
+- GitHub Actions free tier has a monthly minutes cap; 20-minute intervals comfortably fit within it
 - Scheduled runs aren't guaranteed to fire at the exact minute (GitHub's cron can be delayed under load)
-```
+
 
 
 
