@@ -1,0 +1,42 @@
+name: Email Responder
+
+on:
+  schedule:
+      - cron: "*/30 * * * *"
+  workflow_dispatch:  # lets you manually trigger a run from the Actions tab
+
+permissions:
+  contents: write  # needed to commit processed_ids.txt back
+
+jobs:
+  run-responder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client groq python-dotenv beautifulsoup4
+
+      - name: Recreate credential files from secrets
+        run: |
+          echo '${{ secrets.CREDENTIALS_JSON }}' > credentials.json
+          echo '${{ secrets.TOKEN_JSON }}' > token.json
+          echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" > .env
+
+      - name: Run the email responder
+        run: python fetch_emails.py
+
+      - name: Commit updated processed_ids.txt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add processed_ids.txt
+          git diff --staged --quiet || git commit -m "Update processed_ids.txt [skip ci]"
+          git push
